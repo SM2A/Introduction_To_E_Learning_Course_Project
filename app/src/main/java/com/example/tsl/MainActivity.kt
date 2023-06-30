@@ -23,6 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.tsl.model.content.*
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,21 +31,16 @@ class MainActivity : ComponentActivity() {
         setContent {
             LessonList(
                 list = listOf(
-                    "آزمون ورودی",
-                    "تابلوهای دستوری",
-                    "تابلوهای هشداری",
-                    "تابلوهای اطلاعاتی",
-                    "تابلوهای بازدازنده و انتظامی",
-                    "تابلوهای آگاهی دهنده",
-                    "تابلوهای راهنما مسیر",
-                    "تابلوهای محلی",
-                    "علائم جاده‌ای",
-                    "علائم جاده‌ای1",
-                    "2علائم جاده‌ای",
-                    "3علائم جاده‌ای",
-                    "4علائم جاده‌ای",
-                    "آزمون نهایی",
-                    "آزمون سنج یادگیری"
+                    EntryExam,
+                    CautionarySigns,
+                    IndicativeSigns,
+                    DeterrentSigns,
+                    RoadGuideSigns,
+                    DomesticSigns,
+                    ComplimentarySigns,
+                    Labels,
+                    FinalExam,
+                    RememberExam
                 ),
                 modifier = Modifier
                     .fillMaxWidth()
@@ -57,7 +53,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun LessonList(
-    list: List<String>,
+    list: List<ContentType>,
     modifier: Modifier = Modifier
 ) {
     LazyColumn(
@@ -66,16 +62,16 @@ fun LessonList(
     ) {
         items(
             items = list,
-            key = { msg -> msg }
+            key = { msg -> msg.title }
         ) {
-            LessonItem(text = it)
+            LessonItem(item = it)
         }
     }
 }
 
 @Composable
 fun LessonItem(
-    text: String
+    item: ContentType
 ) {
     Box(
         modifier = Modifier
@@ -89,8 +85,7 @@ fun LessonItem(
                 width = 1.dp,
                 color = Color(0xFF4CAF50),
                 shape = RoundedCornerShape(8.dp)
-            )
-            .padding(top = 8.dp, bottom = 8.dp),
+            ),
         contentAlignment = Alignment.Center
     ) {
         Button(
@@ -106,12 +101,14 @@ fun LessonItem(
                 pressedElevation = 0.dp
             ),
             onClick = {
-                Log.e("TAG", "LessonItem: $text")
-            }
+                Log.e("TAG", "LessonItem: $item")
+            },
         ) {
             Text(
-                text = text,
-                fontSize = 32.sp,
+                modifier = Modifier
+                    .padding(top = 8.dp, bottom = 8.dp),
+                text = item.title,
+                fontSize = 28.sp,
                 color = Color(0xFF525252)
             )
         }
