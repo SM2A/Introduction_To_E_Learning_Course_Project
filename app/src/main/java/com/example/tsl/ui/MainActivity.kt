@@ -1,7 +1,7 @@
-package com.example.tsl
+package com.example.tsl.ui
 
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
@@ -21,6 +21,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.tsl.model.content.*
@@ -62,7 +63,7 @@ fun LessonList(
     ) {
         items(
             items = list,
-            key = { msg -> msg.title }
+            key = { msg -> msg.hashCode() }
         ) {
             LessonItem(item = it)
         }
@@ -73,6 +74,7 @@ fun LessonList(
 fun LessonItem(
     item: ContentType
 ) {
+    val context = LocalContext.current
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -101,7 +103,12 @@ fun LessonItem(
                 pressedElevation = 0.dp
             ),
             onClick = {
-                Log.e("TAG", "LessonItem: $item")
+                val intent = Intent(
+                    context,
+                    if (item is Exam) ExamActivity::class.java else LessonActivity::class.java
+                )
+                intent.putExtra("className", item::class.java.simpleName)
+                context.startActivity(intent)
             },
         ) {
             Text(
