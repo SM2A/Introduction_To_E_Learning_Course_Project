@@ -20,11 +20,9 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.example.tsl.model.content.*
+import com.example.tsl.ui.theme.*
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -78,15 +76,15 @@ fun LessonItem(
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(4.dp)
+            .padding(PADDING_4)
             .background(
-                color = Color(0xFFCEFF95),
-                shape = RoundedCornerShape(8.dp)
+                color = LIGHT_GREEN,
+                shape = RoundedCornerShape(CORNER_RADIUS)
             )
             .border(
-                width = 1.dp,
-                color = Color(0xFF4CAF50),
-                shape = RoundedCornerShape(8.dp)
+                width = BIRDER_WIDTH,
+                color = DARK_GREEN,
+                shape = RoundedCornerShape(CORNER_RADIUS)
             ),
         contentAlignment = Alignment.Center
     ) {
@@ -95,12 +93,12 @@ fun LessonItem(
                 .fillMaxHeight()
                 .fillMaxWidth(),
             colors = ButtonDefaults.buttonColors(
-                backgroundColor = Color.Transparent,
-                contentColor = Color.Transparent
+                backgroundColor = TRANSPARENT,
+                contentColor = TRANSPARENT
             ),
             elevation = ButtonDefaults.elevation(
-                defaultElevation = 0.dp,
-                pressedElevation = 0.dp
+                defaultElevation = ELEVATION_0,
+                pressedElevation = ELEVATION_0
             ),
             onClick = {
                 val intent = Intent(
@@ -113,10 +111,10 @@ fun LessonItem(
         ) {
             Text(
                 modifier = Modifier
-                    .padding(top = 8.dp, bottom = 8.dp),
+                    .padding(top = PADDING_8, bottom = PADDING_8),
                 text = item.title,
-                fontSize = 28.sp,
-                color = Color(0xFF525252)
+                fontSize = TITLE_FONT_SIZE,
+                color = DARK_GRAY
             )
         }
     }
