@@ -110,8 +110,7 @@ fun LessonItem(
             },
         ) {
             Text(
-                modifier = Modifier
-                    .padding(top = PADDING_8, bottom = PADDING_8),
+                modifier = Modifier.padding(top = PADDING_8, bottom = PADDING_8),
                 text = item.title,
                 fontSize = TITLE_FONT_SIZE,
                 color = DARK_GRAY
