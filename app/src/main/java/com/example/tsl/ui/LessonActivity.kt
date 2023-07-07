@@ -1,14 +1,14 @@
 package com.example.tsl.ui
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.runtime.Composable
+import androidx.compose.material.Text
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
@@ -17,6 +17,7 @@ import com.example.tsl.R
 import com.example.tsl.model.content.Lesson
 import com.example.tsl.util.getDataFromName
 import com.example.tsl.viewmodel.LessonViewModel
+import kotlinx.coroutines.delay
 
 class LessonActivity : ComponentActivity() {
 
@@ -27,33 +28,69 @@ class LessonActivity : ComponentActivity() {
 
         viewModel.data = getDataFromName(intent.getStringExtra("className")) as Lesson
 
-        viewModel.itemIndex.observe(this) {
-            if (it >= 0) {
-
-            }
-        }
-
         setContent {
+            var redraw by remember {mutableStateOf(false) }
+            var showNextBtn = (viewModel.itemIndex + 1) < viewModel.data.lessonContent.size
+            var showPrevBtn = viewModel.itemIndex >= 0
+            LaunchedEffect(key1 = redraw) {
+                delay(100)
+                redraw = !redraw
+                showNextBtn = (viewModel.itemIndex + 1) < viewModel.data.lessonContent.size
+                showPrevBtn = viewModel.itemIndex >= 0
+            }
             Column(
-                modifier = Modifier,
+                modifier = Modifier.fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.SpaceEvenly
             ) {
+                if (showNextBtn && showPrevBtn) {
+                    LessonContentItem(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .weight(0.8f),
+                        description = viewModel.getItem().description,
+                        image = viewModel.getItem().image
+                    )
+                }
                 NavigationButtons(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .fillMaxHeight(fraction = 0.2f),
+                        .weight(0.2f),
                     nextAction = {
                         viewModel.nextItem()
                     },
                     prevAction = {
                         viewModel.previousItem()
-                    }
+                    },
+                    showNext = showNextBtn,
+                    showPrev = showPrevBtn
                 )
             }
         }
     }
 
+}
+
+@Composable
+fun LessonContentItem(
+    description: String,
+    image: Int,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = modifier,
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.SpaceEvenly
+    ) {
+        Image(
+            painter = painterResource(id = image),
+            contentDescription = "Traffic sign",
+            modifier = Modifier
+        )
+        Text(
+            text = description
+        )
+    }
 }
 
 @Composable

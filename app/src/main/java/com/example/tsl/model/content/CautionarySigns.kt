@@ -11,6 +11,26 @@ object CautionarySigns : Lesson() {
         LessonItem(
             image = R.drawable.danger,
             description = "تابلو خطر"
+        ),
+        LessonItem(
+            image = R.drawable.uneven,
+            description = "تابلو نزدیک شدن به دست انداز"
+        ),
+        LessonItem(
+            image = R.drawable.narrow_road,
+            description = "تابلو جاده باریک"
+        ),
+        LessonItem(
+            image = R.drawable.pedestrian_crossing,
+            description = "تابلو عبور عابر پیاده"
+        ),
+        LessonItem(
+            image = R.drawable.roundabout,
+            description = "تابلو نزدیک شدن به میدان"
+        ),
+        LessonItem(
+            image = R.drawable.two_way_street,
+            description = "تابلو جاده دو طرفه"
         )
     )
 
