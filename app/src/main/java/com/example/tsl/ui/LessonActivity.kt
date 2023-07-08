@@ -1,6 +1,7 @@
 package com.example.tsl.ui
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
@@ -45,7 +46,10 @@ class LessonActivity : ComponentActivity() {
             val nextAction = if (showNextBtn) {
                 { viewModel.nextItem() }
             } else {
-                { finish() }
+                {
+                    if (viewModel.correctItemSelected) finish()
+                    else Toast.makeText(this, "باید گزینه درست رو انتخاب کنی", Toast.LENGTH_SHORT).show()
+                }
             }
             val prevAction = if (showPrevBtn) {
                 { viewModel.previousItem() }
@@ -85,6 +89,7 @@ class LessonActivity : ComponentActivity() {
                                 val done = applicationContext.getStringSetPreference("LESSON_DONE").toMutableSet()
                                 done.add(viewModel.data::class.java.simpleName)
                                 applicationContext.savePreference("LESSON_DONE", done)
+                                viewModel.correctItemSelected = true
                             }
                         }
                     )

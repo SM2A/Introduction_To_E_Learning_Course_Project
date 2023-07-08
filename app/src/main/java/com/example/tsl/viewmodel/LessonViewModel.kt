@@ -15,6 +15,8 @@ class LessonViewModel @Inject constructor() : ViewModel() {
     private val itemIndexMutable = MutableStateFlow(-1)
     val itemIndex: StateFlow<Int> = itemIndexMutable
 
+    var correctItemSelected = false
+
     fun nextItem() {
         if (itemIndex.value < data.lessonContent.size) itemIndexMutable.value = (itemIndexMutable.value + 1)
     }
