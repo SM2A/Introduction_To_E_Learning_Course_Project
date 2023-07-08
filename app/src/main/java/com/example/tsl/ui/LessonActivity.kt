@@ -46,21 +46,12 @@ class LessonActivity : ComponentActivity() {
                         image = viewModel.getItem().image
                     )
                 } else if (showNextBtn) {
-                    Box(
+                    IntroText(
                         modifier = Modifier
                             .fillMaxWidth()
                             .weight(0.8f),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Text(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .fillMaxHeight()
-                                .wrapContentHeight(align = Alignment.CenterVertically),
-                            textAlign = TextAlign.Center,
-                            text = viewModel.data.intro
-                        )
-                    }
+                        text = viewModel.data.intro
+                    )
                 } else if (showPrevBtn) {
 
                 }
@@ -101,6 +92,26 @@ fun LessonContentItem(
         )
         Text(
             text = description
+        )
+    }
+}
+
+@Composable
+fun IntroText(
+    text: String,
+    modifier: Modifier = Modifier
+) {
+    Box(
+        modifier = modifier,
+        contentAlignment = Alignment.Center
+    ) {
+        Text(
+            modifier = Modifier
+                .fillMaxWidth()
+                .fillMaxHeight()
+                .wrapContentHeight(align = Alignment.CenterVertically),
+            textAlign = TextAlign.Center,
+            text = text
         )
     }
 }
