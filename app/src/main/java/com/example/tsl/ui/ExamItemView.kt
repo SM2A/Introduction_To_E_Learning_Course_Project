@@ -1,6 +1,5 @@
 package com.example.tsl.ui
 
-import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -26,7 +25,6 @@ fun ExamView(
     callback: ExamCallback,
     modifier: Modifier = Modifier
 ) {
-    val context = LocalContext.current
     val answers = item.answers.toList().shuffled()
     Box(
         modifier = modifier,
@@ -84,10 +82,9 @@ fun ExamView(
                                 onClick = {
                                     btnColor = if (answers[it].second) {
                                         callback.onCorrectItemSelected()
-                                        Toast.makeText(context, "آفرین درست بود", Toast.LENGTH_SHORT).show()
                                         CORRECT_GREEN
                                     } else {
-                                        Toast.makeText(context, "اشتباه زدی", Toast.LENGTH_SHORT).show()
+                                        callback.onWrongItemSelected()
                                         WRONG_RED
                                     }
                                 },

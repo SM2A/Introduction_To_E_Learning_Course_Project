@@ -86,10 +86,14 @@ class LessonActivity : ComponentActivity() {
                         item = viewModel.data.exam,
                         callback = object : ExamCallback{
                             override fun onCorrectItemSelected() {
+                                Toast.makeText(this@LessonActivity, "آفرین درست بود", Toast.LENGTH_SHORT).show()
                                 val done = applicationContext.getStringSetPreference("LESSON_DONE").toMutableSet()
                                 done.add(viewModel.data::class.java.simpleName)
                                 applicationContext.savePreference("LESSON_DONE", done)
                                 viewModel.correctItemSelected = true
+                            }
+                            override fun onWrongItemSelected() {
+                                Toast.makeText(this@LessonActivity, "اشتباه زدی", Toast.LENGTH_SHORT).show()
                             }
                         }
                     )
