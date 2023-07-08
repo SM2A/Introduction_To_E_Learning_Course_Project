@@ -31,7 +31,7 @@ class LessonActivity : ComponentActivity() {
         setContent {
             val index = viewModel.itemIndex.collectAsState()
 
-            val showNextBtn = (index.value + 1) < viewModel.data.lessonContent.size
+            val showNextBtn = index.value < viewModel.data.lessonContent.size
             val showPrevBtn = index.value >= 0
 
             val nextImage =
@@ -71,7 +71,12 @@ class LessonActivity : ComponentActivity() {
                         text = viewModel.data.intro
                     )
                 } else if (showPrevBtn) {
-
+                    ExamView(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .weight(0.8f),
+                        item = viewModel.data.exam
+                    )
                 }
                 NavigationButtons(
                     modifier = Modifier

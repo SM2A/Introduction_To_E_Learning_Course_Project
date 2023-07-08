@@ -16,7 +16,7 @@ class LessonViewModel @Inject constructor() : ViewModel() {
     val itemIndex: StateFlow<Int> = itemIndexMutable
 
     fun nextItem() {
-        if (itemIndex.value < (data.lessonContent.size - 1)) itemIndexMutable.value = (itemIndexMutable.value + 1)
+        if (itemIndex.value < data.lessonContent.size) itemIndexMutable.value = (itemIndexMutable.value + 1)
     }
 
     fun previousItem() {
