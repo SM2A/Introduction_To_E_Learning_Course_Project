@@ -1,6 +1,7 @@
 package com.example.tsl.model.content
 
 import com.example.tsl.R
+import com.example.tsl.model.ExamItem
 import com.example.tsl.model.LessonItem
 
 object CautionarySigns : Lesson() {
@@ -36,4 +37,9 @@ object CautionarySigns : Lesson() {
         )
     )
 
+    override val exam = ExamItem(
+        image = R.drawable.danger,
+        question = "این چه تابلوییه ؟",
+        answers = mapOf("خطر" to true, "میدون" to false, "چراغ" to false, "سرعت" to false)
+    )
 }
