@@ -74,6 +74,7 @@ class LessonActivity : ComponentActivity() {
                     ExamView(
                         modifier = Modifier
                             .fillMaxWidth()
+                            .fillMaxHeight()
                             .weight(0.8f),
                         item = viewModel.data.exam
                     )
