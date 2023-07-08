@@ -1,7 +1,6 @@
 package com.example.tsl.ui
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
@@ -19,6 +18,8 @@ import com.example.tsl.R
 import com.example.tsl.model.ExamCallback
 import com.example.tsl.model.content.Lesson
 import com.example.tsl.util.getDataFromName
+import com.example.tsl.util.getStringSetPreference
+import com.example.tsl.util.savePreference
 import com.example.tsl.viewmodel.LessonViewModel
 
 class LessonActivity : ComponentActivity() {
@@ -81,7 +82,9 @@ class LessonActivity : ComponentActivity() {
                         item = viewModel.data.exam,
                         callback = object : ExamCallback{
                             override fun onCorrectItemSelected() {
-                                Log.w("TAG", "onCorrectItemSelected: 1111111111111111")
+                                val done = applicationContext.getStringSetPreference("LESSON_DONE").toMutableSet()
+                                done.add(viewModel.data::class.java.simpleName)
+                                applicationContext.savePreference("LESSON_DONE", done)
                             }
                         }
                     )
@@ -156,7 +159,7 @@ fun NavigationButtons(
     Row(
         modifier = modifier,
         horizontalArrangement = Arrangement.SpaceAround,
-        verticalAlignment = Alignment.CenterVertically,
+        verticalAlignment = Alignment.CenterVertically
     ) {
         DirectionButton(
             modifier = Modifier

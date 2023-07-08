@@ -1,16 +1,12 @@
 package com.example.tsl.ui
 
 import android.content.Intent
-import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -21,14 +17,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import com.example.tsl.model.content.*
 import com.example.tsl.ui.theme.*
+import com.example.tsl.util.getStringSetPreference
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onResume() {
+        super.onResume()
         setContent {
             LessonList(
                 list = listOf(
@@ -90,33 +88,48 @@ fun LessonItem(
             ),
         contentAlignment = Alignment.Center
     ) {
-        Button(
-            modifier = Modifier
-                .fillMaxHeight()
-                .fillMaxWidth(),
-            colors = ButtonDefaults.buttonColors(
-                backgroundColor = TRANSPARENT,
-                contentColor = TRANSPARENT
-            ),
-            elevation = ButtonDefaults.elevation(
-                defaultElevation = ELEVATION_0,
-                pressedElevation = ELEVATION_0
-            ),
-            onClick = {
-                val intent = Intent(
-                    context,
-                    if (item is Exam) ExamActivity::class.java else LessonActivity::class.java
-                )
-                intent.putExtra("className", item::class.java.simpleName)
-                context.startActivity(intent)
-            },
+        Row(
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            Text(
-                modifier = Modifier.padding(top = PADDING_8, bottom = PADDING_8),
-                text = item.title,
-                fontSize = TITLE_FONT_SIZE,
-                color = DARK_GRAY
-            )
+            if (item::class.java.simpleName in context.getStringSetPreference("LESSON_DONE")) {
+                Image(
+                    modifier = Modifier
+                        .padding(vertical = PADDING_8),
+                    painter = painterResource(
+                        id = com.example.tsl.R.drawable.baseline_check_24
+                    ),
+                    contentDescription = "Done image"
+                )
+            }
+            Button(
+                modifier = Modifier
+                    .fillMaxHeight()
+                    .fillMaxWidth(),
+                colors = ButtonDefaults.buttonColors(
+                    backgroundColor = TRANSPARENT,
+                    contentColor = TRANSPARENT
+                ),
+                elevation = ButtonDefaults.elevation(
+                    defaultElevation = ELEVATION_0,
+                    pressedElevation = ELEVATION_0
+                ),
+                onClick = {
+                    val intent = Intent(
+                        context,
+                        if (item is Exam) ExamActivity::class.java else LessonActivity::class.java
+                    )
+                    intent.putExtra("className", item::class.java.simpleName)
+                    context.startActivity(intent)
+                },
+            ) {
+                Text(
+                    modifier = Modifier.padding(top = PADDING_8, bottom = PADDING_8),
+                    text = item.title,
+                    fontSize = TITLE_FONT_SIZE,
+                    color = DARK_GRAY
+                )
+            }
         }
     }
 }
