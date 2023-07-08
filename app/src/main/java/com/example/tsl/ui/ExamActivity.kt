@@ -8,6 +8,7 @@ import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
+import com.example.tsl.BuildConfig
 import com.example.tsl.model.ExamCallback
 import com.example.tsl.model.content.Exam
 import com.example.tsl.util.getDataFromName
@@ -22,15 +23,14 @@ class ExamActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        if (viewModel.data::class.java.simpleName in this.getStringSetPreference("LESSON_DONE")) {
+        viewModel.data = getDataFromName(intent.getStringExtra("className")) as Exam
+
+        if ((viewModel.data::class.java.simpleName in this.getStringSetPreference("LESSON_DONE")) && !BuildConfig.DEBUG) {
             Toast.makeText(this, "قبلا این آزمون رو انجام دادی", Toast.LENGTH_SHORT).show()
             finish()
         }
 
-        viewModel.data = getDataFromName(intent.getStringExtra("className")) as Exam
-
         setContent {
-
             val index = viewModel.itemIndex.collectAsState()
 
             val hasNextItem = index.value < viewModel.data.examContent.size
@@ -45,6 +45,7 @@ class ExamActivity : ComponentActivity() {
                         override fun onCorrectItemSelected() {
                             Toast.makeText(this@ExamActivity, "آفرین درست بود", Toast.LENGTH_SHORT)
                                 .show()
+                            viewModel.correctAnswer()
                             viewModel.nextItem()
                         }
 
@@ -62,6 +63,10 @@ class ExamActivity : ComponentActivity() {
                 val done = applicationContext.getStringSetPreference("LESSON_DONE").toMutableSet()
                 done.add(viewModel.data::class.java.simpleName)
                 applicationContext.savePreference("LESSON_DONE", done)
+
+                applicationContext.savePreference(viewModel.data::class.java.simpleName, viewModel.getScore())
+                Toast.makeText(this, "نمره شما: ${viewModel.getScore()} از 100", Toast.LENGTH_LONG).show()
+
                 finish()
             }
         }

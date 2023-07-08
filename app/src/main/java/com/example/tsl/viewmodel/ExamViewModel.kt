@@ -15,9 +15,15 @@ class ExamViewModel @Inject constructor() : ViewModel() {
     private val itemIndexMutable = MutableStateFlow(0)
     val itemIndex: StateFlow<Int> = itemIndexMutable
 
+    private var correctCount = 0
+
     fun nextItem() {
         if (itemIndex.value < data.examContent.size) itemIndexMutable.value = (itemIndexMutable.value + 1)
     }
 
     fun getItem() = data.examContent[itemIndexMutable.value]
+
+    fun correctAnswer() = correctCount++
+
+    fun getScore() = ((correctCount.toFloat() / data.examContent.size.toFloat()) * 100).toInt()
 }

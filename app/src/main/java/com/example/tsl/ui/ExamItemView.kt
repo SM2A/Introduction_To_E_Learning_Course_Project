@@ -22,7 +22,8 @@ import com.example.tsl.ui.theme.*
 fun ExamView(
     item: ExamItem,
     callback: ExamCallback,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    isQuiz: Boolean = false
 ) {
     val answers = item.answers.toList().shuffled()
     Box(
@@ -81,10 +82,10 @@ fun ExamView(
                                 onClick = {
                                     btnColor = if (answers[it].second) {
                                         callback.onCorrectItemSelected()
-                                        CORRECT_GREEN
+                                        if (isQuiz) CORRECT_GREEN else LIGHT_BLUE
                                     } else {
                                         callback.onWrongItemSelected()
-                                        WRONG_RED
+                                        if (isQuiz) WRONG_RED else LIGHT_BLUE
                                     }
                                 },
                             ) {

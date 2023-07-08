@@ -84,6 +84,7 @@ class LessonActivity : ComponentActivity() {
                             .fillMaxHeight()
                             .weight(0.8f),
                         item = viewModel.data.exam,
+                        isQuiz = true,
                         callback = object : ExamCallback{
                             override fun onCorrectItemSelected() {
                                 Toast.makeText(this@LessonActivity, "آفرین درست بود", Toast.LENGTH_SHORT).show()

@@ -46,17 +46,17 @@ fun Context.getBooleanPreference(key: String): Boolean {
     return pref.getBoolean(key, false)
 }
 
-fun Context.savePreference(key: String, value: Float) {
+fun Context.savePreference(key: String, value: Int) {
     val pref = this.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
     with(pref.edit()) {
-        putFloat(key, value)
+        putInt(key, value)
         apply()
     }
 }
 
-fun Context.getFloatPreference(key: String): Float {
+fun Context.getIntPreference(key: String): Int {
     val pref = this.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
-    return pref.getFloat(key, -1f)
+    return pref.getInt(key, -1)
 }
 
 fun Context.savePreference(key: String, value: Set<String>) {
