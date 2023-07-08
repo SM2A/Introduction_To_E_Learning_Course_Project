@@ -6,6 +6,8 @@ object DomesticSigns : Lesson() {
 
     override val title = "تابلوهای محلی"
 
+    override val intro = ""
+
     override val lessonContent: List<LessonItem> = emptyList()
 
 }

@@ -6,6 +6,8 @@ object IndicativeSigns : Lesson() {
 
     override val title = "تابلوهای آگاهی دهنده (اخباری)"
 
+    override val intro = ""
+
     override val lessonContent: List<LessonItem> = emptyList()
 
 }

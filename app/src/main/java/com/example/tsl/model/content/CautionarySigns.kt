@@ -7,6 +7,8 @@ object CautionarySigns : Lesson() {
 
     override val title = "تابلوهای هشدار دهنده (اخطاری)"
 
+    override val intro = "در این بخش میخوایم در مورد تایلو های هشداری توضیح بدیم"
+
     override val lessonContent: List<LessonItem> = listOf(
         LessonItem(
             image = R.drawable.danger,

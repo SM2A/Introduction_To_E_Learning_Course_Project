@@ -6,6 +6,8 @@ object ComplimentarySigns : Lesson() {
 
     override val title = "تابلوهای مکمل"
 
+    override val intro = ""
+
     override val lessonContent: List<LessonItem> = emptyList()
 
 }

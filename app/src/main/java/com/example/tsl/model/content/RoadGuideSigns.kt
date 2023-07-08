@@ -6,6 +6,8 @@ object RoadGuideSigns : Lesson() {
 
     override val title = "تابلوهای راهنما مسیر"
 
+    override val intro = ""
+
     override val lessonContent: List<LessonItem> = emptyList()
 
 }
