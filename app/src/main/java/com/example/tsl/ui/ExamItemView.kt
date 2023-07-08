@@ -1,25 +1,30 @@
 package com.example.tsl.ui
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import com.example.tsl.model.ExamItem
-import com.example.tsl.ui.theme.PADDING_8
+import com.example.tsl.ui.theme.*
 
 @Composable
 fun ExamView(
     item: ExamItem,
     modifier: Modifier = Modifier
 ) {
+    val context = LocalContext.current
     val answers = item.answers.toList().shuffled()
     Box(
         modifier = modifier,
@@ -44,10 +49,57 @@ fun ExamView(
                         horizontalAlignment = Alignment.CenterHorizontally,
                         verticalArrangement = Arrangement.SpaceAround
                     ) {
-                        Text(
-                            modifier = Modifier.padding(top = PADDING_8, bottom = PADDING_8),
-                            text = answers[it].first
-                        )
+                        var btnColor by remember {
+                            mutableStateOf(LIGHT_BLUE)
+                        }
+                        Box(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(PADDING_4)
+                                .background(
+                                    color = btnColor,
+                                    shape = RoundedCornerShape(CORNER_RADIUS)
+                                )
+                                .border(
+                                    width = BIRDER_WIDTH,
+                                    color = DARK_BLUE,
+                                    shape = RoundedCornerShape(CORNER_RADIUS)
+                                ),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Button(
+                                modifier = Modifier
+                                    .fillMaxHeight()
+                                    .fillMaxWidth(),
+                                colors = ButtonDefaults.buttonColors(
+                                    backgroundColor = TRANSPARENT,
+                                    contentColor = TRANSPARENT
+                                ),
+                                elevation = ButtonDefaults.elevation(
+                                    defaultElevation = ELEVATION_0,
+                                    pressedElevation = ELEVATION_0
+                                ),
+                                onClick = {
+                                    btnColor = if (answers[it].second) {
+                                        Toast.makeText(context, "آفرین درست بود", Toast.LENGTH_SHORT).show()
+                                        CORRECT_GREEN
+                                    } else {
+                                        Toast.makeText(context, "اشتباه زدی", Toast.LENGTH_SHORT).show()
+                                        WRONG_RED
+                                    }
+                                },
+                            ) {
+                                Text(
+                                    modifier = Modifier.padding(
+                                        top = PADDING_8,
+                                        bottom = PADDING_8
+                                    ),
+                                    text = answers[it].first,
+                                    fontSize = TITLE_FONT_SIZE,
+                                    color = DARK_GRAY
+                                )
+                            }
+                        }
                     }
                 }
             }
