@@ -13,4 +13,6 @@ abstract class Lesson : ContentType() {
     abstract val exam: ExamItem
 }
 
-abstract class Exam : ContentType()
+abstract class Exam : ContentType() {
+    abstract val examContent: List<ExamItem>
+}
