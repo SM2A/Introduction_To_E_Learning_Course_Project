@@ -1,6 +1,7 @@
 package com.example.tsl.ui
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
@@ -15,6 +16,7 @@ import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import com.example.tsl.R
+import com.example.tsl.model.ExamCallback
 import com.example.tsl.model.content.Lesson
 import com.example.tsl.util.getDataFromName
 import com.example.tsl.viewmodel.LessonViewModel
@@ -76,7 +78,12 @@ class LessonActivity : ComponentActivity() {
                             .fillMaxWidth()
                             .fillMaxHeight()
                             .weight(0.8f),
-                        item = viewModel.data.exam
+                        item = viewModel.data.exam,
+                        callback = object : ExamCallback{
+                            override fun onCorrectItemSelected() {
+                                Log.w("TAG", "onCorrectItemSelected: 1111111111111111")
+                            }
+                        }
                     )
                 }
                 NavigationButtons(

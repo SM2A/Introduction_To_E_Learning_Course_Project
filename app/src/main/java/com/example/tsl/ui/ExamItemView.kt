@@ -16,12 +16,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import com.example.tsl.model.ExamCallback
 import com.example.tsl.model.ExamItem
 import com.example.tsl.ui.theme.*
 
 @Composable
 fun ExamView(
     item: ExamItem,
+    callback: ExamCallback,
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
@@ -81,6 +83,7 @@ fun ExamView(
                                 ),
                                 onClick = {
                                     btnColor = if (answers[it].second) {
+                                        callback.onCorrectItemSelected()
                                         Toast.makeText(context, "آفرین درست بود", Toast.LENGTH_SHORT).show()
                                         CORRECT_GREEN
                                     } else {
