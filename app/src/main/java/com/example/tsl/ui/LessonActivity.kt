@@ -30,8 +30,26 @@ class LessonActivity : ComponentActivity() {
 
         setContent {
             val index = viewModel.itemIndex.collectAsState()
+
             val showNextBtn = (index.value + 1) < viewModel.data.lessonContent.size
             val showPrevBtn = index.value >= 0
+
+            val nextImage =
+                if (showNextBtn) R.drawable.baseline_navigate_next_24 else R.drawable.baseline_check_24
+            val prevImage =
+                if (showPrevBtn) R.drawable.baseline_navigate_next_24 else R.drawable.baseline_close_24
+
+            val nextAction = if (showNextBtn) {
+                { viewModel.nextItem() }
+            } else {
+                { finish() }
+            }
+            val prevAction = if (showPrevBtn) {
+                { viewModel.previousItem() }
+            } else {
+                { finish() }
+            }
+
             Column(
                 modifier = Modifier.fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally,
@@ -59,14 +77,10 @@ class LessonActivity : ComponentActivity() {
                     modifier = Modifier
                         .fillMaxWidth()
                         .weight(0.2f),
-                    nextAction = {
-                        viewModel.nextItem()
-                    },
-                    prevAction = {
-                        viewModel.previousItem()
-                    },
-                    showNext = showNextBtn,
-                    showPrev = showPrevBtn
+                    nextAction = { nextAction.invoke() },
+                    prevAction = { prevAction.invoke() },
+                    nextImage = nextImage,
+                    prevImage = prevImage
                 )
             }
         }
@@ -118,6 +132,8 @@ fun IntroText(
 
 @Composable
 fun NavigationButtons(
+    nextImage: Int,
+    prevImage: Int,
     nextAction: () -> Unit,
     prevAction: () -> Unit,
     modifier: Modifier = Modifier,
@@ -135,6 +151,7 @@ fun NavigationButtons(
                 .rotate(180f)
                 .weight(1f),
             isVisible = showPrev,
+            image = prevImage,
             onClickAction = {
                 prevAction.invoke()
             }
@@ -144,6 +161,7 @@ fun NavigationButtons(
                 .fillMaxHeight()
                 .weight(1f),
             isVisible = showNext,
+            image = nextImage,
             onClickAction = {
                 nextAction.invoke()
             }
@@ -153,6 +171,7 @@ fun NavigationButtons(
 
 @Composable
 fun DirectionButton(
+    image: Int,
     onClickAction: () -> Unit,
     modifier: Modifier = Modifier,
     isVisible: Boolean = true
@@ -160,7 +179,7 @@ fun DirectionButton(
     if (isVisible) {
         Image(
             painter = painterResource(
-                id = R.drawable.baseline_navigate_next_24
+                id = image
             ),
             contentDescription = "Navigation button",
             modifier = modifier.clickable {
