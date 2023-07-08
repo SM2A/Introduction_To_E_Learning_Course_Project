@@ -12,6 +12,7 @@ import com.example.tsl.BuildConfig
 import com.example.tsl.model.ExamCallback
 import com.example.tsl.model.content.Exam
 import com.example.tsl.util.getDataFromName
+import com.example.tsl.util.getIntPreference
 import com.example.tsl.util.getStringSetPreference
 import com.example.tsl.util.savePreference
 import com.example.tsl.viewmodel.ExamViewModel
@@ -25,8 +26,16 @@ class ExamActivity : ComponentActivity() {
 
         viewModel.data = getDataFromName(intent.getStringExtra("className")) as Exam
 
-        if ((viewModel.data::class.java.simpleName in this.getStringSetPreference("LESSON_DONE")) && !BuildConfig.DEBUG) {
-            Toast.makeText(this, "قبلا این آزمون رو انجام دادی", Toast.LENGTH_SHORT).show()
+        if ((viewModel.data::class.java.simpleName in this.getStringSetPreference("LESSON_DONE"))
+            && !BuildConfig.DEBUG
+        ) {
+            Toast.makeText(
+                this,
+                "قبلا این آزمون رو انجام دادی\r\nنمره شما: ${
+                    applicationContext.getIntPreference(viewModel.data::class.java.simpleName)
+                } از 100",
+                Toast.LENGTH_SHORT
+            ).show()
             finish()
         }
 
