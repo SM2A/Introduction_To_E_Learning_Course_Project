@@ -17,7 +17,6 @@ import com.example.tsl.R
 import com.example.tsl.model.content.Lesson
 import com.example.tsl.util.getDataFromName
 import com.example.tsl.viewmodel.LessonViewModel
-import kotlinx.coroutines.delay
 
 class LessonActivity : ComponentActivity() {
 
@@ -29,15 +28,9 @@ class LessonActivity : ComponentActivity() {
         viewModel.data = getDataFromName(intent.getStringExtra("className")) as Lesson
 
         setContent {
-            var redraw by remember {mutableStateOf(false) }
-            var showNextBtn = (viewModel.itemIndex + 1) < viewModel.data.lessonContent.size
-            var showPrevBtn = viewModel.itemIndex >= 0
-            LaunchedEffect(key1 = redraw) {
-                delay(100)
-                redraw = !redraw
-                showNextBtn = (viewModel.itemIndex + 1) < viewModel.data.lessonContent.size
-                showPrevBtn = viewModel.itemIndex >= 0
-            }
+            val index = viewModel.itemIndex.collectAsState()
+            val showNextBtn = (index.value + 1) < viewModel.data.lessonContent.size
+            val showPrevBtn = index.value >= 0
             Column(
                 modifier = Modifier.fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally,
