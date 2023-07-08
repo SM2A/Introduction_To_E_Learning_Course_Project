@@ -13,6 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
 import com.example.tsl.R
 import com.example.tsl.model.content.Lesson
 import com.example.tsl.util.getDataFromName
@@ -44,6 +45,24 @@ class LessonActivity : ComponentActivity() {
                         description = viewModel.getItem().description,
                         image = viewModel.getItem().image
                     )
+                } else if (showNextBtn) {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .weight(0.8f),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .fillMaxHeight()
+                                .wrapContentHeight(align = Alignment.CenterVertically),
+                            textAlign = TextAlign.Center,
+                            text = viewModel.data.intro
+                        )
+                    }
+                } else if (showPrevBtn) {
+
                 }
                 NavigationButtons(
                     modifier = Modifier

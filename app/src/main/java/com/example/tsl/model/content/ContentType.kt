@@ -7,6 +7,7 @@ abstract class ContentType {
 }
 
 abstract class Lesson : ContentType() {
+    abstract val intro: String
     abstract val lessonContent: List<LessonItem>
 }
 
