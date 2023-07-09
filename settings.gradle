@@ -1,17 +1,5 @@
 pluginManagement {
     repositories {
-        maven {
-            url "https://nexus.phoenix.mahsan.net/repository/maven-google/"
-            credentials {
-                username System.getenv("PUBLIC_DOCKER_REGISTRY_USERNAME")
-                password System.getenv("PUBLIC_DOCKER_REGISTRY_PASSWORD")
-            }
-        }
-        maven { url "https://repo.phoenix.mahsan.net/artifactory/jitpack" }
-        maven { url "https://repo.phoenix.mahsan.net/artifactory/central" }
-        maven { url "https://repo.phoenix.mahsan.net/artifactory/emm" }
-        // jcenter should be the last entry in repositories list
-        maven { url "https://repo.phoenix.mahsan.net/artifactory/jcenter" }
         google()
         mavenCentral()
         gradlePluginPortal()
@@ -20,18 +8,6 @@ pluginManagement {
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
-        maven {
-            url "https://nexus.phoenix.mahsan.net/repository/maven-google/"
-            credentials {
-                username System.getenv("PUBLIC_DOCKER_REGISTRY_USERNAME")
-                password System.getenv("PUBLIC_DOCKER_REGISTRY_PASSWORD")
-            }
-        }
-        maven { url "https://repo.phoenix.mahsan.net/artifactory/jitpack" }
-        maven { url "https://repo.phoenix.mahsan.net/artifactory/central" }
-        maven { url "https://repo.phoenix.mahsan.net/artifactory/emm" }
-        // jcenter should be the last entry in repositories list
-        maven { url "https://repo.phoenix.mahsan.net/artifactory/jcenter" }
         google()
         mavenCentral()
     }
