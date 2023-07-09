@@ -55,7 +55,7 @@ object CautionarySigns : Lesson() {
     )
 
     override val exam = ExamItem(
-        image = R.drawable.turn_right,
+        image = R.drawable.turn_right_caution,
         question = "تابلو بالا چه تابلویی است ؟",
         answers = mapOf(
             "پیچ به راست" to true,
