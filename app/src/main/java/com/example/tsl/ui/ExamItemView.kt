@@ -14,6 +14,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
 import com.example.tsl.model.ExamCallback
 import com.example.tsl.model.ExamItem
 import com.example.tsl.ui.theme.*
@@ -56,6 +57,7 @@ fun ExamView(
                         Box(
                             modifier = Modifier
                                 .fillMaxWidth()
+                                .fillMaxHeight()
                                 .padding(PADDING_4)
                                 .background(
                                     color = btnColor,
@@ -90,15 +92,20 @@ fun ExamView(
                                     }
                                 },
                             ) {
-                                Text(
-                                    modifier = Modifier.padding(
-                                        top = PADDING_8,
-                                        bottom = PADDING_8
-                                    ),
-                                    text = answers[it].first,
-                                    fontSize = TITLE_FONT_SIZE,
-                                    color = DARK_GRAY
-                                )
+                                Box(
+                                    contentAlignment = Alignment.Center
+                                ) {
+                                    Text(
+                                        modifier = Modifier.padding(
+                                            top = PADDING_8,
+                                            bottom = PADDING_8
+                                        ),
+                                        text = answers[it].first,
+                                        fontSize = SELECT_BOX_FONT_SIZE,
+                                        color = DARK_GRAY,
+                                        textAlign = TextAlign.Center
+                                    )
+                                }
                             }
                         }
                     }
