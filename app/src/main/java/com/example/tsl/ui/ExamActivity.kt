@@ -26,9 +26,7 @@ class ExamActivity : ComponentActivity() {
 
         viewModel.data = getDataFromName(intent.getStringExtra("className")) as Exam
 
-        if ((viewModel.data::class.java.simpleName in this.getStringSetPreference("LESSON_DONE"))
-            && !BuildConfig.DEBUG
-        ) {
+        if (viewModel.data::class.java.simpleName in this.getStringSetPreference("LESSON_DONE")) {
             Toast.makeText(
                 this,
                 "قبلا این آزمون رو انجام دادی\r\nنمره شما: ${

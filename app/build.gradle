@@ -22,14 +22,11 @@ android {
         }
     }
 
-    if(null == System.getenv('_PASSWORD_')) {
-        throw new GradleException('Password not defined')
-    }
-    println System.getenv('_PASSWORD_')
-
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            debuggable false
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }

@@ -41,11 +41,11 @@ object CautionarySigns : Lesson() {
             description = "تابلو هشدار سقوط سنگ"
         ),
         LessonItem(
-            image = R.drawable.crossroads,
+            image = R.drawable.bend,
             description = "تابلو جاده مارپیچ اولین پیچ به چپ"
         ),
         LessonItem(
-            image = R.drawable.bend,
+            image = R.drawable.crossroads,
             description = "تابلو تقاطع مسیر فرعی با اصلی"
         ),
         LessonItem(

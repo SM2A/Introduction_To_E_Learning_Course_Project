@@ -23,9 +23,7 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
       - name: Build with Gradle
-        run: |
-          export _PASSWORD_="123"
-          ./gradlew assemble
+        run: ./gradlew assemble
       - uses: actions/upload-artifact@v3
         with:
          path: app/build/outputs/apk/debug/*.apk
