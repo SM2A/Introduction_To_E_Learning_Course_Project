@@ -22,6 +22,10 @@ android {
         }
     }
 
+    if(null == System.getenv('_PASSWORD_')) {
+        throw new GradleException('Password not defined')
+    }
+
     buildTypes {
         release {
             minifyEnabled false
