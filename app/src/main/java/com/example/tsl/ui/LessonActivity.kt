@@ -18,6 +18,7 @@ import androidx.compose.ui.text.style.TextAlign
 import com.example.tsl.R
 import com.example.tsl.model.ExamCallback
 import com.example.tsl.model.content.Lesson
+import com.example.tsl.ui.theme.DESCRIPTION_FONT_SIZE
 import com.example.tsl.util.getDataFromName
 import com.example.tsl.util.getStringSetPreference
 import com.example.tsl.util.savePreference
@@ -131,7 +132,8 @@ fun LessonContentItem(
             modifier = Modifier
         )
         Text(
-            text = description
+            text = description,
+            fontSize = DESCRIPTION_FONT_SIZE
         )
     }
 }
@@ -151,7 +153,8 @@ fun IntroText(
                 .fillMaxHeight()
                 .wrapContentHeight(align = Alignment.CenterVertically),
             textAlign = TextAlign.Center,
-            text = text
+            text = text,
+            fontSize = DESCRIPTION_FONT_SIZE
         )
     }
 }

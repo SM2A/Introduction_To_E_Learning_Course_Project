@@ -41,7 +41,8 @@ fun ExamView(
                 modifier = Modifier
             )
             Text(
-                text = item.question
+                text = item.question,
+                fontSize = DESCRIPTION_FONT_SIZE
             )
             LazyVerticalGrid(columns = GridCells.Fixed(2)) {
                 items(item.answers.size) {

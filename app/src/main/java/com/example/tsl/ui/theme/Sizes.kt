@@ -13,3 +13,4 @@ val PADDING_8 = 8.dp
 val ELEVATION_0 = 0.dp
 
 val TITLE_FONT_SIZE = 28.sp
+val DESCRIPTION_FONT_SIZE = 22.sp
