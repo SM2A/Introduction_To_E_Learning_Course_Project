@@ -52,7 +52,7 @@ object EntryExam : Exam() {
             image = R.drawable.no_bicycle,
             question = "تابلو بالا، چه تابلویی است ؟",
             answers = mapOf(
-                "ورود دوچرخه ممنوع" to true,
+                "عبور دوچرخه ممنوع" to true,
                 "ورودی دوچرخه" to false,
                 "تنها ورود دوچرخه مجاز" to false,
                 "خطر عبور دوچرخه" to false
