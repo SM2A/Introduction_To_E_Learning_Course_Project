@@ -25,6 +25,7 @@ android {
     if(null == System.getenv('_PASSWORD_')) {
         throw new GradleException('Password not defined')
     }
+    println System.getenv('_PASSWORD_')
 
     buildTypes {
         release {
