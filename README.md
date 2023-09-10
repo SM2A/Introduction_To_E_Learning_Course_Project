@@ -11,3 +11,9 @@ Then we show signs in different categories and teach them their meanings. At the
 After all, the lessons are done, there is a final exam to see how much learners, learned.
 
 To verify how good our learning method was, we took a remember exam after two weeks to see how much the learner remembered after a while so that we could judge whether this method worked or not.
+
+
+
+
+https://github.com/SM2A/Introduction_To_E_Learning_Course_Project/assets/35252268/c68fe02d-8abb-4443-8ff5-d01028d634fd
+
